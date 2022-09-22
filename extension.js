@@ -19,7 +19,7 @@ const os = require("os");
 	set(key, value){
 		this.storage.update(key, value)
 	}
-	
+
 	add(key, value){
 		let data = this.storage.get(key)
 		if(!data){
@@ -61,7 +61,7 @@ const os = require("os");
 	}
 }
 class Core{
-	
+
 	constructor(context, filePath){
 		this.context = context
 		this.fileContent=fs.readFileSync(filePath, "utf8");
@@ -166,10 +166,11 @@ function formatTitle(title){
 	return title;
 }
 
+// solid colored images can be fixed with css filters
 function fixIconColor(fontColor){
 	if (!fontColor) return ``;
 
-	// HACK: fix potential icon sets based on solid colored images
+	//HACK: fix potential icon sets based on solid colored images
 	// filter:  brightness(100); !important; -> white
 	// filter:  brightness(0); !important; -> black
 	// filter:  grayscale(100%) !important; -> grayish
@@ -179,7 +180,7 @@ function fixIconColor(fontColor){
 	if (fontColor.includes("white")) return `filter: brightness(100) !important;`
 	if (fontColor.includes("black")) return `filter: brightness(0) !important;`
 	if (fontColor.includes("gray")) return `filter: grayscale(100%) contrast(150%) !important;`
-	
+
 	// general bit of boost to contrast
 	return `filter: contrast(150%) !important;`;
 }
@@ -242,7 +243,7 @@ function generateCssFile(context) {
 		if (backgroundSelectorsArr.length > 0) {
 			backgroundSelectors = backgroundSelectorsArr.join(",") + `{background-color:${_background} !important; opacity:0.6;}`
 		}
-  
+
 		if (fontColorSelectorsArr.length > 0) {
 			fontColorSelectors = fontColorSelectorsArr.join(",") + `{color:${_fontColor} !important;${fixIconColor(activeTab.fontColor)}}`
 		}
@@ -257,7 +258,7 @@ function generateCssFile(context) {
 		let test = fs.mkdirSync(modulesPath(context), { recursive: true });
 		console.log("css", test)
 	}
-  
+
 	console.log("file", cssFile)
 	if (fs.existsSync(cssFile)) {
 		fs.writeFileSync(cssFile, style);
@@ -274,7 +275,7 @@ function generateCssFile(context) {
 		});
 	}
  }
- 
+
 function setColor(context, color, title){
 		let storage = new Storage(context);
 		if(storage.get("patchedBefore")){
@@ -346,7 +347,7 @@ function activate(context) {
 		var listen = (function(){
 			var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 			return function( obj, callback ){
-				if( !obj || !obj.nodeType === 1 ) return;  
+				if( !obj || !obj.nodeType === 1 ) return;
 				if( MutationObserver ){
 					var obs = new MutationObserver(function(mutations, observer){
 						callback(mutations);
@@ -359,7 +360,7 @@ function activate(context) {
 			}
 		})();
 		let listElm = element;
-		listen( listElm, function(m){ 
+		listen( listElm, function(m){
 			var addedNodes = []
 			m.forEach(record => record.addedNodes.length & addedNodes.push(...record.addedNodes))
 			if(callback!=0)
@@ -381,7 +382,7 @@ function activate(context) {
 					})
 					reloadCss()
 				}
-				
+
 			})
 		},1000)
 		var cssCreateProc = setInterval(function(){
@@ -390,7 +391,7 @@ function activate(context) {
 			}
 		},500)
 	})`
-	
+
 	if(!bootstrap.hasPatch("watcher")){
 		if(bootstrap.isReadOnly() && !bootstrap.chmod()){
 				bootstrap.sudoPrompt(function(result){
@@ -442,7 +443,7 @@ function activate(context) {
 
 	storage.set("firstActivation", true)
 	let disposable = vscode.commands.registerCommand('tabscolor.test', function () {
-		
+
 		bootstrap.sudoPrompt(function(result){})
 	});
 
@@ -469,7 +470,7 @@ function activate(context) {
 	});
 
 
-	 
+
 
 	 disposable = vscode.commands.registerCommand('tabscolor.none', function (a, b) {
 		let file = vscode.window.activeTextEditor.document.fileName;
@@ -477,13 +478,13 @@ function activate(context) {
 		unsetColor(context, file.replace(/\\/g,"\\\\"));
 	});
 
-	
+
 	disposable = vscode.commands.registerCommand('tabscolor.repatch', function (a, b) {
 		bootstrap.remove("watcher").add("watcher", code).write()
 		promptRestart()
 	});
 
-	
+
 	disposable = vscode.commands.registerCommand('tabscolor.removePatch', function (a, b) {
 		bootstrap.remove("watcher").write()
 		promptRestart()
@@ -516,7 +517,7 @@ function activate(context) {
 		if(a) file = a.fsPath;
 		setColor(context, "red", file.replace(/\\/g,"\\\\"));
 
-	});	
+	});
 
 	 disposable = vscode.commands.registerCommand('tabscolor.orange', function (a, b) {
 		let file = vscode.window.activeTextEditor.document.fileName;
