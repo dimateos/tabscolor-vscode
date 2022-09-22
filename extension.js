@@ -197,10 +197,10 @@ function fixIconColor(fontColor){
 function generateCssFile(context) {
 	let colors = {
 		"none": { background: "transparent", color: "inherit" },
-		"salmon": { background: "#9d533a", color: "white" },
+		"salmon": { background: "#EE82EE", color: "white" },	// left for pink
 		"green": { background: "#528752", color: "white" },
-		"blue": { background: "#3498DB", color: "white" },
-		"orange": { background: "#DC7633", color: "white" },
+		"blue": { background: "#0000FF", color: "white" },		// personal alternative blue
+		"orange": { background: "#9d533a", color: "white" },	// orange is the new salmon
 		"yellow": { background: "#F1C40F", color: "black" },
 		"red": { background: "#C0392B", color: "white" },
 		"black": { background: "#000000", color: "white" },
