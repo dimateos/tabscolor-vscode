@@ -178,9 +178,17 @@ function fixIconColor(fontColor){
 	// filter:  contrast(1000%) !important; -> vibrant COLOR
 	// filter:  saturate(10); !important; -> alt COLOR
 
-	if (fontColor.includes("white")) return `filter: brightness(100) !important;`
-	if (fontColor.includes("black")) return `filter: brightness(0) !important;`
-	if (fontColor.includes("gray")) return `filter: grayscale(100%) contrast(150%) !important;`
+	//NOTE alternatively could be done for HEX colors by calculating the luminance
+	//	but better to not do both so other color descriptions can bypass the icon fix
+
+	// match gray first to avoid dark/light
+	if (["gray", "grey"].includes(fontColor))
+		return `filter: grayscale(100%) contrast(150%) !important;`
+
+	if (["white", "light"].includes(fontColor))
+		return `filter: brightness(100) !important;`
+	if (["black", "dark"].includes(fontColor))
+		return `filter: brightness(0) !important;`
 
 	// general bit of boost to contrast
 	return `filter: contrast(150%) !important;`;
