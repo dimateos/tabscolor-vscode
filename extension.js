@@ -168,6 +168,7 @@ function formatTitle(title){
 
 // solid colored images can be fixed with css filters
 function fixIconColor(fontColor){
+	// return ``;
 	if (!fontColor) return ``;
 
 	//HACK: fix potential icon sets based on solid colored images
@@ -245,7 +246,7 @@ function generateCssFile(context) {
 		}
 
 		if (fontColorSelectorsArr.length > 0) {
-			fontColorSelectors = fontColorSelectorsArr.join(",") + `{color:${_fontColor} !important;${fixIconColor(activeTab.fontColor)}}`
+			fontColorSelectors = fontColorSelectorsArr.join(",") + `{color:${_fontColor} !important;${fixIconColor(_fontColor)}}`
 		}
 		style += backgroundSelectors + fontColorSelectors
 	}
