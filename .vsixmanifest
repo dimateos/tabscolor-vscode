@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 	<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
 		<Metadata>
-			<Identity Language="en-US" Id="tabscolor" Version="0.1.20" Publisher="mondersky" TargetPlatform="win32-x64"/>
+			<Identity Language="en-US" Id="tabscolor" Version="0.1.22" Publisher="mondersky" TargetPlatform="win32-x64"/>
 			<DisplayName>Tabs color</DisplayName>
 			<Description xml:space="preserve">Color any tab by right click, based on file type or based on direcory</Description>
 			<Tags>tab,color,highlight,filetype,regex</Tags>
